@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sifa Clinic</title>
+</head>
+
+<body>
+<script>
+
+function getFacebookUrl() {
+  
+    let userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    // Windows Phone must come first because its UA also contains "Android"
+    if (/windows phone/i.test(userAgent)) {
+        return "fb://profile/100063563259367";
+    }
+
+    if (/android/i.test(userAgent)) {
+        return "intent://profile/100063563259367#Intent;package=com.facebook.katana;scheme=fb;end";
+    }
+
+    // iOS detection from: http://stackoverflow.com/a/9039885/177710
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        return "fb://profile/100063563259367";
+    }
+
+    return "https://facebook.com/sifaclinic";
+}
+
+let url = getFacebookUrl();
+
+window.location.replace(url);
+
+</script>
+</body>
+
+</html>
